@@ -14,13 +14,16 @@ public class Code02_Heap {
             this.limit = limit;
             heapSize = 0;
         }
+
         public boolean isEmpty() {
             return heapSize == 0;
         }
+
         public boolean isFull() {
             return heapSize == limit;
         }
 
+        //向大根堆中新增一个数，保证加完之后还是大根堆
         public void push(int value) {
             if (heapSize == limit) {
                 throw new RuntimeException("heap is full");
@@ -30,43 +33,42 @@ public class Code02_Heap {
             heapInsert(heap, heapSize++);
         }
 
-        // 用户此时，让你返回最大值，并且在大根堆中，把最大值删掉
-        // 剩下的数，依然保持大根堆组织
+        // 用户此时，让你返回最大值，并且在大根堆中把最大值删掉，剩下的数仍然是大根堆
         public int pop() {
             int ans = heap[0];
+            // 用最后一个元素tail 顶替第一个元素，heapSize减一，tail向下看和较大的孩子交换，继续找较大的孩子
             swap(heap, 0, --heapSize);
             heapify(heap, 0, heapSize);
             return ans;
         }
 
-        // 新加进来的数，现在停在了index位置，请依次往上移动，
-        // 移动到0位置，或者干不掉自己的父亲了，停！
+        //向大根堆中新增一个数，保证加完之后还是大根堆
+        // 复杂度 log(N)
         private void heapInsert(int[] arr, int index) {
             // [index]    [index-1]/2
             // index == 0
-            //新来的数比父亲大
             while (arr[index] > arr[(index - 1) / 2]) {
-                //交换
+                //新来的数向上看，如果比父亲大，交换，直到不比父亲大，停！
                 swap(arr, index, (index - 1) / 2);
                 //下标来到父亲的位置
                 index = (index - 1) / 2;
             }
         }
 
-        // 从index位置，往下看，不断的下沉
-        // 停：较大的孩子都不再比index位置的数大；已经没孩子了
+        // arr从index位置，往下看，不断的下沉，达到长度heapSize为止
+        // 孩子都不再比index位置的数大 或者 已经没孩子了，停！
+        // 复杂度 log(N)
         private void heapify(int[] arr, int index, int heapSize) {
             int left = index * 2 + 1;
-            // 左孩子没越界，说明有左孩子
-            // 如果有左孩子，有没有右孩子，可能有可能没有！
+            // 左孩子没越界，说明有左孩子，但未必有右孩子；没有左孩子肯定也没有右孩子
             while (left < heapSize) {
-                // 把较大孩子的下标，给largest
-                //右孩子大的情况：有右孩子 && 右孩子大于左孩子
-                //左孩子大的情况：else
+                // 把两个孩子中较大孩子的下标，给largest
+                // 右孩子大的情况：有右孩子 && 右孩子大于左孩子
+                // 左孩子大的情况：else
                 int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
-                //拿到自己和孩子中最大值的下标
+                // 拿到自己和孩子中最大值的下标
                 largest = arr[largest] > arr[index] ? largest : index;
-                //孩子没有比自己大的，跳出
+                // 孩子没有比自己大的，跳出
                 if (largest == index) {
                     break;
                 }
