@@ -1,5 +1,8 @@
 package class10;
 
+/**
+ * 递归遍历二叉树
+ **/
 public class Code02_RecursiveTraversalBT {
 
 	public static class Node {
@@ -33,6 +36,7 @@ public class Code02_RecursiveTraversalBT {
 		pre(head.right);
 	}
 
+	// 中序打印所有节点
 	public static void in(Node head) {
 		if (head == null) {
 			return;
@@ -42,6 +46,7 @@ public class Code02_RecursiveTraversalBT {
 		in(head.right);
 	}
 
+	// 后序打印所有节点
 	public static void pos(Node head) {
 		if (head == null) {
 			return;

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * 给定一棵二叉树的头节点head，任何两个节点之间都存在距离，
+ * 返回整棵二叉树的最大距离
+ **/
 public class Code06_MaxDistance {
 
 	public static class Node {
@@ -119,6 +123,9 @@ public class Code06_MaxDistance {
 //		return new Info(maxDistance, height);
 //	}
 
+	/**
+	 * 递归
+	 **/
 	public static int maxDistance2(Node head) {
 		return process(head).maxDistance;
 	}
@@ -131,15 +138,19 @@ public class Code06_MaxDistance {
 			maxDistance = m;
 			height = h;
 		}
-
 	}
 
 	public static Info process(Node x) {
 		if (x == null) {
 			return new Info(0, 0);
 		}
+		// 1）假设以X节点为头，假设可以向X左树和X右树要任何信息
 		Info leftInfo = process(x.left);
 		Info rightInfo = process(x.right);
+		// 2）在上一步的假设下，讨论以X为头节点的树，得到答案的可能性
+		// 3）列出所有可能性后，确定到底需要向左树和右树要什么样的信息
+
+		// 自己的高度
 		int height = Math.max(leftInfo.height, rightInfo.height) + 1;
 		int p1 = leftInfo.maxDistance;
 		int p2 = rightInfo.maxDistance;

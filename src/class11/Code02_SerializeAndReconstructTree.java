@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class Code02_SerializeAndReconstructTree {
+public class  Code02_SerializeAndReconstructTree {
     /*
      * 二叉树可以通过先序、后序或者按层遍历的方式序列化和反序列化，
      * 以下代码全部实现了。
@@ -31,6 +31,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	//先序遍历 序列化
 	public static Queue<String> preSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		pres(head, ans);
@@ -38,6 +39,7 @@ public class Code02_SerializeAndReconstructTree {
 	}
 
 	public static void pres(Node head, Queue<String> ans) {
+		//子节点不存在，用null补齐
 		if (head == null) {
 			ans.add(null);
 		} else {
@@ -79,6 +81,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 利用先序序列化结果，复原树
 	public static Node buildByPreQueue(Queue<String> prelist) {
 		if (prelist == null || prelist.size() == 0) {
 			return null;
@@ -120,6 +123,7 @@ public class Code02_SerializeAndReconstructTree {
 		return head;
 	}
 
+	// 按层序列化
 	public static Queue<String> levelSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		if (head == null) {

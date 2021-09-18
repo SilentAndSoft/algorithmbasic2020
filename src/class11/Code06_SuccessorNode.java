@@ -13,18 +13,26 @@ public class Code06_SuccessorNode {
 		}
 	}
 
+	/**
+	 * 找到一个节点的后继节点（二叉树按中序遍历，node的下一个节点就是后继节点）
+	 **/
 	public static Node getSuccessorNode(Node node) {
 		if (node == null) {
 			return node;
 		}
+		//有右树
 		if (node.right != null) {
+			//找到右树的最左节点
 			return getLeftMost(node.right);
-		} else { // 无右子树
+		}
+		// 无右树
+		else {
 			Node parent = node.parent;
 			while (parent != null && parent.right == node) { // 当前节点是其父亲节点右孩子
 				node = parent;
 				parent = node.parent;
 			}
+			//直到当前节点是其父亲的左孩子，停
 			return parent;
 		}
 	}

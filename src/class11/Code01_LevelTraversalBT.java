@@ -3,6 +3,9 @@ package class11;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * 按层遍历二叉树
+ **/
 public class Code01_LevelTraversalBT {
 
 	public static class Node {
@@ -15,6 +18,7 @@ public class Code01_LevelTraversalBT {
 		}
 	}
 
+	// 用队列，宽度优先
 	public static void level(Node head) {
 		if (head == null) {
 			return;
