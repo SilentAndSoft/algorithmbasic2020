@@ -36,6 +36,7 @@ public class Code01_FindFirstIntersectNode {
 
     /**
      * 找到链表第一个入环节点，如果无环，返回null
+     * 判断链表有环（环形链表）
      **/
     public static Node getLoopNode(Node head) {
         if (head == null || head.next == null || head.next.next == null) {

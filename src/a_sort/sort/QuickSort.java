@@ -18,8 +18,13 @@ public class QuickSort {
         if (L >= R) {
             return;
         }
-        //L~R随机选一个数交换到R位置，划分值越靠中间性能越好，越靠两边越差
+        /*
+         * L~R随机选一个数交换到R位置，划分值越靠中间性能越好，越靠两边越差
+         * 划分值来到中间，最好情况，左右规模一样的时候性能最好，各自 N/2 的复杂度
+         * 划分值在端点，最差情况，比如当数组有序的时候做partition，性能最差，复杂度O(N^2)
+         */
         swap(arr, L + (int) (Math.random() * (R - L + 1)), R);
+        // 找到等与区域的左右边界
         int[] equalArea = netherlandsFlag(arr, L, R);
         process(arr, L, equalArea[0] - 1);
         process(arr, equalArea[1] + 1, R);
@@ -38,7 +43,7 @@ public class QuickSort {
         int more = R + 1; // 大于区 左边界
         int cur = L;
         int num = arr[R];
-        // 当前位置，不能和 >区的左边界撞上
+        // 当前位置，不能和 大于区的左边界撞上
         while (cur < more) {
             //当前数等于划分值
             if (arr[cur] == num) {

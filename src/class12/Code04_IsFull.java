@@ -1,5 +1,11 @@
 package class12;
 
+/**
+ * 判断二叉树是否是满二叉树
+ * 思路：
+ * 一棵满二叉树，高度为L，节点数为N
+ * 那么必然有：2^L - 1 = N
+ **/
 public class Code04_IsFull {
 
 	public static class Node {

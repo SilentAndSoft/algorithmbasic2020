@@ -24,8 +24,11 @@ public class MergeSort {
             return;
         }
         int mid = L + ((R - L) >> 1);
+        // 先搞左边
         process(arr, L, mid);
+        // 再搞右边
         process(arr, mid + 1, R);
+        // 最后汇总一下
         merge(arr, L, mid, R);
     }
 
