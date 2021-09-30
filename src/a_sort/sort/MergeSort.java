@@ -65,28 +65,23 @@ public class MergeSort {
             return;
         }
         int N = arr.length;
-        // 步长，每次保证2*mergeSize个元素有序
-        int mergeSize = 1;
-        while (mergeSize < N) { // log N
-            // 当前左组的，第一个位置
+        int step = 1;// 步长，每次*2
+        while (step < N) { // log N
+            // 左组的第一个位置
             int L = 0;
             while (L < N) {
-                //左组凑不齐
-                if (mergeSize >= N - L) {
-                    break;
+                int M = L + step - 1;//M代表左组的边界
+                if (M >= N) {
+                    break;//左组凑不齐，说明右组也没了
                 }
-                //L~M左组大小
-                int M = L + mergeSize - 1;
-                //右组可能凑不齐
-                int R = M + Math.min(mergeSize, N - M - 1);
+                int R = Math.min(M+step, N - 1);//右组的右边界，右组可能凑不齐，右边界就是数组的边界
                 merge(arr, L, M, R);
-                L = R + 1;
+                L = R + 1;// 下一个左组的起始位置：R+1
             }
-            // 防止溢出（逼近int最大值时）
-            if (mergeSize > N / 2) {
+            if (step > N / 2) { // 防止溢出（逼近int最大值时）
                 break;
             }
-            mergeSize <<= 1;
+            step <<= 1;
         }
     }
 }
