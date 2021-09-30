@@ -72,9 +72,9 @@ public class MergeSort {
             while (L < N) {
                 int M = L + step - 1;//M代表左组的边界
                 if (M >= N) {
-                    break;//左组凑不齐，说明右组也没了
+                    break;//左组越界说明左组凑不齐，肯定没有右组了，而且这个残缺的左组必然是有序的
                 }
-                int R = Math.min(M+step, N - 1);//右组的右边界，右组可能凑不齐，右边界就是数组的边界
+                int R = Math.min(M + step, N - 1);//右组的右边界，右组可能凑不齐，右边界就是数组的边界
                 merge(arr, L, M, R);
                 L = R + 1;// 下一个左组的起始位置：R+1
             }
